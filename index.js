@@ -63,6 +63,20 @@ const fetchWeather = async (cityName) => {
         break;
     }
 
+    // update gradient for next button
+    let temperature = currentWeather.main.temp;
+    switch(true) {
+      case temperature < 10:
+        checkAndUpdateButtonGradient("cool-gradient");
+        break;
+      case temperature >= 10 && temperature < 25:
+        checkAndUpdateButtonGradient("mid-gradient");
+        break;
+      case temperature > 25:
+        checkAndUpdateButtonGradient("warm-gradient");
+        break;
+    }
+
     // Get 5-day forecast
     const coordinates = currentWeather.coord;
     const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${API_KEY}`;
@@ -186,6 +200,14 @@ const checkAndUpdateBackgroundImage = (bgImageClass) => {
   };
 };
 
+const checkAndUpdateButtonGradient = (gradientClass) => {
+  if ( !switchButton.classList.contains(gradientClass) ) {
+    switchButton.className = "";
+    switchButton.classList.add(gradientClass);
+    switchButton.classList.add("next-btn");
+  };
+};
+
 // Button to switch between cities when clicking button
 const switchButton = document.createElement("button");
 switchButton.classList.add("next-btn");
@@ -200,5 +222,4 @@ switchButton.addEventListener("click", () => {
     if (counter === cityArray.length) {
       counter = 0;
     }
-  
 });

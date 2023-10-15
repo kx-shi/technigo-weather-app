@@ -71,6 +71,23 @@ button{ /* search button */
     left: 70%;
     margin: 0 auto;
     top: 85%;
+    background-size: 300% 300%;
+    -webkit-animation: AnimationName 10s ease infinite;
+    -moz-animation: AnimationName 10s ease infinite;
+    animation: AnimationName 10s ease infinite;
+}
+
+/* Colour gradient classes - depends on temperature */
+.cool-gradient {
+    background: linear-gradient(270deg, #65b9b9, #5ca2ca, #5c72ca);
+}
+
+.mid-gradient {
+    background: linear-gradient(270deg, #3f88b9, #3f5db9, #5d3fb9);
+}
+
+.warm-gradient {
+    background: linear-gradient(270deg, #bb8b65, #bb7165, #b06161);
 }
 
 /* Styling for text */
@@ -154,6 +171,7 @@ footer {
     background-image: url("./design/design1/assets/images/clouds-bg.jpg");
 }
 
+/* Styling for larger screens */
 @media screen and (min-width: 499px) {
     body {
         margin: 5em 0;
@@ -169,4 +187,21 @@ footer {
         background-color: #faf9f9;
         margin-top: 3em;
     }
+}
+
+/* Animation frames for button */
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }
