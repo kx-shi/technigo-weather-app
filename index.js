@@ -5,6 +5,7 @@ const cityInput = document.getElementById("city-input");
 const forecastContainer = document.getElementById("forecast-container");
 const sunriseSunsetContainer = document.getElementById("sun-container");
 let backgroundImage = document.getElementById("background");
+let nextBtnContainer = document.getElementById("nextbtn-container");
 
 const API_KEY = "a9a3b2fda4ff7afe96f32d735ea04df0";
 let cityName = "Gothenburg";
@@ -69,6 +70,14 @@ const fetchWeather = async (cityName) => {
     const weatherInfo = await responseFromApi2.json();
     const weatherList = weatherInfo.list;
     console.log(weatherList);
+
+    // remove all previous forecast items
+    let oldForcastElements = document.getElementsByClassName('forecast-item');
+    if (oldForcastElements.length > 0) {
+      while(oldForcastElements[0]) {
+        oldForcastElements[0].parentNode.removeChild(oldForcastElements[0]);
+      }
+    }
 
     // filtered temperatur from 12:00 each day
     const filteredForecast = weatherList.filter((day) =>
@@ -176,3 +185,20 @@ const checkAndUpdateBackgroundImage = (bgImageClass) => {
     backgroundImage.classList.add("img-bg");
   };
 };
+
+// Button to switch between cities when clicking button
+const switchButton = document.createElement("button");
+switchButton.classList.add("next-btn");
+switchButton.textContent = ">";
+nextBtnContainer.appendChild(switchButton);
+let cityArray = ["Stockholm", "Milano", "Kairo", "Barcelona", "Oslo"];
+let counter = 0; 
+
+switchButton.addEventListener("click", () => {
+  fetchWeather(cityArray[counter]);
+    counter += 1;
+    if (counter === cityArray.length) {
+      counter = 0;
+    }
+  
+});

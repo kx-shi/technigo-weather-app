@@ -60,6 +60,18 @@ button{ /* search button */
     padding: 2em;
 }
 
+/* Styling for next button */
+.next-btn {
+    width: 90px;
+    height: 90px;
+    background-color: #56768a;
+    color: white;
+    font-size: 1.5em;
+    position: absolute;
+    left: 70%;
+    margin: 0 auto;
+    top: 85%;
+}
 
 /* Styling for text */
 p {
