@@ -4,7 +4,8 @@ const searchButton = document.getElementById("search-btn");
 const cityInput = document.getElementById("city-input");
 const forecastContainer = document.getElementById("forecast-container");
 
-const API_KEY = "KEY_API";
+
+const API_KEY = "a9a3b2fda4ff7afe96f32d735ea04df0";
 let cityName = "Gothenburg";
 const fetchWeather = async (cityName) => {
   try {
@@ -126,4 +127,25 @@ searchButton.addEventListener("click", (event) => {
   forecastContainer.innerHTML = ``;
   cityName = cityInput.value;
   fetchWeather(cityName);
+});
+
+
+
+
+
+
+// Button to switch between cities when clicking button
+const switchButton = document.createElement("button");
+switchButton.textContent = ">";
+weatherContainer.appendChild(switchButton);
+let cityArray = ["Stockholm", "Milano", "Kairo", "Barcelona", "Oslo"];
+let counter = 0; 
+
+switchButton.addEventListener("click", () => {
+  fetchWeather(cityArray[counter]);
+    counter += 1;
+    if (counter === cityArray.length) {
+      counter = 0;
+    }
+  
 });
