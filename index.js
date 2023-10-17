@@ -26,7 +26,7 @@ const fetchWeather = async (cityName) => {
     
     // print weather info for city
     cityWeatherContainer.innerHTML = `
-        <h1>${parseInt(currentWeather.main.temp)}<span>°C</span></h1>
+        <h1>${roundFloat(parseFloat(currentWeather.main.temp), 1)}<span>°C</span></h1>
         <h2>${currentWeather.name}</h2>
         <p>${currentWeather.weather[0].description}</p>
         <p>Humidity: ${currentWeather.main.humidity + "%"}</p>
@@ -79,7 +79,7 @@ const fetchWeather = async (cityName) => {
 
     // Get 5-day forecast
     const coordinates = currentWeather.coord;
-    const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${API_KEY}`;
+    const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${API_KEY}&units=metric`;
     const responseFromApi2 = await fetch(weatherURL);
     const weatherInfo = await responseFromApi2.json();
     const weatherList = weatherInfo.list;
@@ -171,7 +171,7 @@ const fetchWeather = async (cityName) => {
       <p>${weekdayFilteredForecast}</p>
       <p><img src="./design/design1/assets/${iconType}" height="30" width="30"/></p>
       <p>${day.wind.speed} m/s</p>
-      <p>${parseInt(currentWeather.main.temp)}<span>°C</span></p>
+      <p>${roundFloat(parseFloat(day.main.temp), 1)}<span>°C</span></p>
       `;
 
       forecastContainer.appendChild(forecast);
@@ -223,3 +223,8 @@ switchButton.addEventListener("click", () => {
       counter = 0;
     }
 });
+
+const roundFloat = (value, precision) => {
+  var multiplier = Math.pow(10, precision || 0);
+  return Math.round(value * multiplier) / multiplier;
+}
